@@ -2,6 +2,8 @@
 #include <cstring>
 #include "account.h"
 #include "data_io.h"
+AccountList accountList("./data/account.csv"); //读取账户列表
+Account* currentAccount; //在程序运行中的当前账户。
 bool Password::input() { //输入密码,并检查是否匹配
 	const int MAX_SIZE = 20;
 	char str[MAX_SIZE];
@@ -39,7 +41,11 @@ void Account::printInfo() {
 	// status的打印可更改为字符串，如显示"student"。当前效果：显示'0'。
 }
 
-AccountList::AccountList(const char path[]) { // Todo:采用更佳的数据结构，方便查找
+AccountList::AccountList(const char path[]) {
+	/* Todo:
+	 * 1. 采用更佳的数据结构存储，方便查找。
+	 * 2. 修改数据在文件的保存格式，方便读取。
+	 */
 	DataReader reader(path);
 	for (int i = 0; !reader.isEOF(); i++) {
 		reader.nextTerm(list[i].profile.name, 20);	//姓名
@@ -66,5 +72,3 @@ Account* AccountList::findByID(char id[]) { // Todo:顺序查找，有待优化
 	}
 	return NULL; //  Todo:存在空引用问题，需要解决。
 }
-AccountList accountList("../data/account.csv");
-Account* currentAccount;
