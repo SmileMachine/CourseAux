@@ -5,8 +5,10 @@ project (CourseAux)
 # 指定为C++11 版本
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 11)
-# 编译选项
-set(CMAKE_CXX_FLAGS -fexec-charset=GBK)
+# 如果平台为Windows，则将可执行文件的编码设置为GBK
+if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+	set(CMAKE_CXX_FLAGS -fexec-charset=GBK)
+endif()
 
 # 将可执行文件输出到项目的根目录
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})

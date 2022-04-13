@@ -7,7 +7,8 @@
 // #include "global_variable.cpp"
 #include "account.h"
 #include "menu.h"
-char* mygets(char input[], int len) {
+#include "log.h"
+static char* mygets(char input[], int len) {
 	char* ret = fgets(input, len, stdin);
 	if (input[strlen(input) - 1] == '\n') {
 		input[strlen(input) - 1] = '\0';
@@ -17,23 +18,27 @@ char* mygets(char input[], int len) {
 void UI::login() {
 	char input[20];
 	bool isLoggedIn = false;
+	puts("请先登录。");
 	while (!isLoggedIn) {
-		puts("请先登录。");
 		printf("学号: ");
 		mygets(input, 20);
 		currentAccount = accountList.findByID(input);
-		for (int i = 0; i < 3; i++) {
+		if (!currentAccount) {
+			puts("学号不存在。");
+			continue;
+		}
+		for (int i = 0; i < 3; i++) { //密码输入可以尝试3次
 			printf("密码: ");
 			isLoggedIn = currentAccount->password.input();
 			if (!isLoggedIn) {
-				printf("密码错误，请重试。\n");
-				// Log::write();
+				puts("密码错误，请重试。\n");
+				logger.write("login failed: wrong password.");
 			} else {
 				break;
 			}
 		}
 	}
-	// Log::write(); //Todo:写入日志，待实现
+	logger.write("logged in.");
 }
 void UI::mainMenu() {
 	bool isLoggedIn = true;
@@ -66,10 +71,13 @@ void UI::mainMenu() {
 				// if(strcmp(newPassword,confirm)==0){
 				currentAccount->password.set(newPassword);
 				// }
+				logger.write("Changed Password.");
 				break;
 			}
 			case 0:
 				isLoggedIn = false;
+				logger.write("logged out.");
+				currentAccount = NULL;
 				break;
 			default:
 				break;

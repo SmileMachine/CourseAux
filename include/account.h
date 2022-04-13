@@ -38,6 +38,7 @@ public:
 class AccountList {
 public:
 	AccountList(const char path[]); //Todo:采用更佳的数据结构，方便查找
+	bool init(const char path[]);
 	Account* findByID(char id[]);	//通过ID查找
 #define AL_SIZE 100					//初步定为100
 	Account list[AL_SIZE];

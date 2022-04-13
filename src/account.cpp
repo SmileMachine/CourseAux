@@ -40,8 +40,10 @@ void Account::printInfo() {
 	printf("status:\t%d\n", profile.status);
 	// status的打印可更改为字符串，如显示"student"。当前效果：显示'0'。
 }
-
 AccountList::AccountList(const char path[]) {
+	init(path);
+}
+bool AccountList::init(const char path[]) {
 	/* Todo:
 	 * 1. 采用更佳的数据结构存储，方便查找。
 	 * 2. 修改数据在文件的保存格式，方便读取。

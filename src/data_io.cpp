@@ -1,10 +1,13 @@
 #include "data_io.h"
 // Data_io 用于读写一个csv文件。
 // 自定义csv行首注释: '#'，即如果在读到'#'则跳过此行。方便在csv中添加表头，或者注释某个条目
+#include <cstdlib>
+#include <string>
 DataReader::DataReader(const char path[])
 	: file(fopen(path, "r")) {
 	if (file == NULL) {
-		printf("文件或路径 \"%s\" 不存在，请检查工作目录是否正确。", path);
+		printf("文件或路径 \"%s\" 不存在，请查工作目录是否正确。", path);
+		// 注意，可执行文件必须从项目的根目录打开，否则会出现相对路径导致的错误。
 		exit(-1);
 	}
 }
