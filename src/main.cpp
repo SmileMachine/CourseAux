@@ -2,8 +2,7 @@
 #include <iostream>
 #include "menu.h"
 int main(int argc, char const* argv[]) {
-	while (true)
-	 {
+	while (true) {
 		UI::login();
 		UI::mainMenu();
 	}
