@@ -3,22 +3,19 @@
 #include <cstdio>
 #include <cstring>
 #include "data_io.h"
-struct UserInfo
-{
-	enum Status
-	{
-		student,
-		teacher,
-		admin,
-		guest,
+struct UserInfo {
+	enum Status {
+		STUDENT,
+		TEACHER,
+		ADMIN,
+		GUEST,
 	};
 	char name[20] = {};	 //姓名
 	char id[15] = {};	 //学工号
 	char group[15] = {}; //用户所在的群组，如班级
 	Status status;		 //该用户的身份
 };
-struct Password
-{ //用户口令相关
+struct Password { //用户口令相关
 public:
 	bool input();		  //输入密码,并检查是否匹配
 	bool set(char str[]); //设置密码
@@ -31,16 +28,14 @@ public:
 private:
 };
 
-class Account
-{
+class Account {
 public:
 	UserInfo profile;  //用户信息
 	Password password; //用户密码
 	void printInfo();
 };
 
-class AccountList
-{
+class AccountList {
 public:
 	AccountList(const char path[]); // Todo:采用更佳的数据结构，方便查找
 	bool init(const char path[]);
