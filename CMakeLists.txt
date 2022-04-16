@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD 11)
 if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 	set(CMAKE_CXX_FLAGS -fexec-charset=GBK)
 endif()
+# set(CMAKE_CXX_FLAGS -Wall)
 
 # 将可执行文件输出到项目的根目录
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
