@@ -1,8 +1,8 @@
 #include <cstdio>
 #include <iostream>
-#include "menu.h"
+#include "UI.h"
 int main(int argc, char const* argv[]) {
-	while (true) {
+	while (!UI::exit) {
 		UI::login();
 		UI::mainMenu();
 	}

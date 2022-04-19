@@ -1,13 +1,14 @@
 #include <iostream>
 #include <cstdio>
 #include <cstring>
-#ifdef WINDOWS
+#ifdef _WIN32
 #include <conio.h>
 #endif
-// #include "global_variable.cpp"
 #include "account.h"
-#include "menu.h"
+#include "UI.h"
 #include "log.h"
+using namespace std;
+
 static char* mygets(char input[], int len) {
 	char* ret = fgets(input, len, stdin);
 	if (input[strlen(input) - 1] == '\n') {
@@ -15,6 +16,7 @@ static char* mygets(char input[], int len) {
 	}
 	return ret;
 }
+bool UI::exit = 0;
 void UI::login() {
 	char input[20];
 	bool isLoggedIn = false;

@@ -1,8 +1,5 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
-#include <cstdio>
-#include <cstring>
-#include "data_io.h"
 struct UserInfo {
 	enum Status {
 		STUDENT,
