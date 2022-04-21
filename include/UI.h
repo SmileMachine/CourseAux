@@ -2,8 +2,23 @@
 #define UI_H
 class UI {
 public:
-	static void login();	//登录界面
-	static void mainMenu(); //主菜单
+	//工具类函数及状态变量
+	static bool isLoggedIn;
 	static bool exit;
+	static char*getString(char input[], int len); //从stdio读取字符串
+	static int getSelection(); //获取用户输入的选择
+	//主菜单
+	static void entry(); //整个系统的入口
+	static void login(); //登录界面
+	//用户账户相关
+	static void accountMenu();
+	static void printAccountInfo();
+	static void changePassword();
+	//学生菜单
+
+	//管理员菜单
+
+	//调试用
+
 };
 #endif

@@ -14,7 +14,11 @@ endif()
 # 将可执行文件输出到项目的根目录
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR})
 # 指定源代码的路径
-file(GLOB SOURCES "src/*")
+file(
+	GLOB SOURCES 
+		"src/*"
+		"src/UI/*"
+)
 add_executable(${PROJECT_NAME} ${SOURCES})
 # 指定头文件的目录
 target_include_directories(${PROJECT_NAME}
