@@ -6,9 +6,11 @@
 #endif
 
 #include "mkdir.h"
-
+/**
+ * @brief 创建一个目录
+ * @param path 目录的字符串
+ */
 void createDirectory(const char path[]) {
-	// 根据path创建文件夹
 #ifdef _WIN32
 	_mkdir(path);
 #else

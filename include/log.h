@@ -12,7 +12,7 @@ public:
 	void write(std::string info, TAG = USER);
 private:
 	std::string getTimeStamp();
-	std::ofstream logFile;
+	std::ofstream logFile; //日志文件流
 };
 extern Log logger;
 #endif

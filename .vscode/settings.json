@@ -1,9 +1,9 @@
 {
 	"editor.fontFamily": "Consolas, '等线', monospace",
-	// "files.encoding": "gbk",
 	"editor.formatOnSave": true,
 	"editor.insertSpaces": false,
 	"cmake.configureOnOpen": true,
+	"C_Cpp.autoAddFileAssociations": false,
 	//format settings
 	"files.insertFinalNewline": true,
 	"C_Cpp.formatting": "vcFormat",
