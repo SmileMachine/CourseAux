@@ -109,7 +109,7 @@ bool UI::isFileExist(string path) {
  */
 string UI::getPath() {
 	string path;
-	cin >> path;
+	getline(cin, path);
 	while (!isFileExist(path)) {
 		cout << "文件不存在，请重新输入\n";
 		cin >> path;
