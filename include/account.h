@@ -14,14 +14,16 @@ struct UserInfo {
 	char group[15] = {}; //用户所在的群组，如班级
 	Status status;		 //该用户的身份
 };
-struct Password { //用户口令相关
+class AccountList;
+class Password { //用户口令相关
+	friend AccountList;
 public:
-	bool check(const char str[]);		  //输入密码,并检查是否匹配
+	bool check(const char str[]); //输入密码,并检查是否匹配
 	bool set(char str[]); //设置密码
 	typedef unsigned int HashVal;
 	bool isInputValid(const char str[]); //检查密码是否合规，如8-16位密码，仅包含数字和字母等
-	HashVal passwordHash; //密码的哈希值
 private:
+	HashVal passwordHash; //密码的哈希值
 };
 
 class Account {

@@ -43,9 +43,7 @@ myhash::HashVal myhash::fileHash(std::fstream&file) {
 		if (file.eof()) {
 			break;
 		}
-		std::cout << tmp;
 		ret = ret * seed + tmp;
 	}
-	std::cout << '\n';
 	return ret;
 }

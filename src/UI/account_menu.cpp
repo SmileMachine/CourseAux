@@ -1,11 +1,13 @@
 #include <cstdio>
 #include <iostream>
+#include <cstdlib>
 #include "account.h"
 #include "UI.h"
 #include "log.h"
 using namespace std;
 // 登录界面
 void UI::login() {
+	system("cls");
 	cout << "1. 登录\n";
 	cout << "2. 退出\n";
 	while (true) {
@@ -46,24 +48,30 @@ void UI::login() {
 
 // 账户管理菜单
 void UI::accountMenu() {
-	cout << "1. 个人信息\n";
-	cout << "2. 修改密码\n";
-	cout << "0. 退出账号\n";
-	int select = getSelection();
-	switch (select) {
-		case 1:
-			printAccountInfo();
-			break;
-		case 2:
-			changePassword();
-			break;
-		case 0:
-			isLoggedIn = false;
-			logger.write("logged out.");
-			currentAccount = NULL;
-			break;
-		default:
-			break;
+	while (true) {
+		cout << "1. 个人信息\n";
+		cout << "2. 修改密码\n";
+		cout << "3. 退出账号\n";
+		cout << "0. 返回上层\n";
+		int select = getSelection();
+		switch (select) {
+			case 1:
+				printAccountInfo();
+				break;
+			case 2:
+				changePassword();
+				logger.write("Changed Password.");
+				break;
+			case 3:
+				isLoggedIn = false;
+				logger.write("logged out.");
+				currentAccount = NULL;
+				return;
+			case 0:
+				return;
+			default:
+				break;
+		}
 	}
 }
 
@@ -98,5 +106,4 @@ void UI::changePassword() {
 	// } else {
 	// 	cout<<"两次输入不匹配。\n";
 	// }
-	logger.write("Changed Password.");
 }
