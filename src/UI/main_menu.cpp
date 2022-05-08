@@ -12,14 +12,14 @@
 using namespace std;
 bool UI::exit = 0;
 bool UI::isLoggedIn = false;
-
+bool UI::CLEAR = false;
 /**
  * @brief 系统的入口。
  * 使用admin登录之后可以开启调试模式
  */
 void UI::entry() {
 	while (!exit) {
-		system("cls");
+		CLEAR&&system("cls");
 		cout << "欢迎来到线下课程辅助系统!\n";
 		if (!isLoggedIn) {
 			login();

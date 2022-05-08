@@ -1,7 +1,7 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 #include "myhash.h"
-
+#include <string>
 struct UserInfo {
 	enum Status {
 		STUDENT,
@@ -9,9 +9,9 @@ struct UserInfo {
 		ADMIN,
 		GUEST,
 	};
-	char name[20] = {};	 //姓名
-	char id[15] = {};	 //学工号
-	char group[15] = {}; //用户所在的群组，如班级
+	std::string name = {};	 //姓名
+	std::string id = {};	 //学工号
+	std::string group = {}; //用户所在的群组，如班级
 	Status status;		 //该用户的身份
 };
 class AccountList;
@@ -37,12 +37,11 @@ class AccountList {
 public:
 	AccountList(const char path[]); // Todo:采用更佳的数据结构，方便查找
 	void init(const char path[]);
-	Account *findByID(char id[]); //通过ID查找
+	Account *findByID(std::string id); //通过ID查找
 #define AL_SIZE 100				  //初步定为100
 	Account list[AL_SIZE];
-
-private:
 	int size = 0;
+private:
 };
 
 extern AccountList accountList;

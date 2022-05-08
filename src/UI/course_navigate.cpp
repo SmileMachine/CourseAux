@@ -4,7 +4,7 @@
 using namespace std;
 
 void UI::courseNavigate() {
-	system("cls");
+	CLEAR&&system("cls");
 	cout << "课程导航\n";
 	cout << "0.返回\n";
 	int select = getSelection();

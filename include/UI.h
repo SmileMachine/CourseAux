@@ -4,6 +4,7 @@
 class UI {
 public:
 	//工具类函数及状态变量
+	static bool CLEAR;
 	static bool isLoggedIn;
 	static bool exit;
 	static char*getString(char input[], int len); //从stdio读取字符串

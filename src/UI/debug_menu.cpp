@@ -4,12 +4,14 @@ using namespace std;
 
 #include "UI.h"
 #include "myhash.h"
+#include "account.h"
 void UI::debugMenu() {
-	system("cls");
+	CLEAR&&system("cls");
 	while (true) {
 		cout << "1. 文件查重\n";
 		cout << "2. 文件压缩\n";
 		cout << "3. 文件解压\n";
+		cout << "4. 打印所有账户信息\n";
 		cout << "0. 返回上层\n";
 		int select = getSelection();
 		switch (select) {
@@ -35,6 +37,18 @@ void UI::debugMenu() {
 				cout << "请输入文件的路径。\n";
 				string filePath = getPath();
 				// fileDeCompress(filePath);
+				break;
+			}
+			case 4: {
+				Account*tmp = currentAccount;
+				cout << "size = " << accountList.size << endl;
+				for (int i = 0;i < accountList.size;i++) {
+					currentAccount = &accountList.list[i];
+					printAccountInfo();
+					cout << '\n';
+				}
+				currentAccount = tmp;
+				system("pause");
 				break;
 			}
 			case 0:

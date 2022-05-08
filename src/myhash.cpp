@@ -15,6 +15,9 @@ myhash::HashVal myhash::stringHash(const char str[]) {
 	}
 	return ret;
 }
+myhash::HashVal myhash::stringHash(std::string str) {
+	return stringHash(str.c_str());
+}
 
 /**
  * @brief 计算一个文件的BKDR_Hash

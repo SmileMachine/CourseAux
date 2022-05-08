@@ -15,4 +15,5 @@
 	"C_Cpp.vcFormat.newLine.closeBraceSameLine.emptyFunction": true,
 	"C_Cpp.vcFormat.newLine.closeBraceSameLine.emptyType": true,
 	"C_Cpp.vcFormat.indent.caseLabels": true,
+	"files.eol": "\n",
 }

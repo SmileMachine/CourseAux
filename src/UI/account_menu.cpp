@@ -7,7 +7,7 @@
 using namespace std;
 // 登录界面
 void UI::login() {
-	system("cls");
+	CLEAR&&system("cls");
 	cout << "1. 登录\n";
 	cout << "2. 退出\n";
 	while (true) {

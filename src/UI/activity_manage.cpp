@@ -6,7 +6,7 @@ using namespace std;
  * @brief 活动管理
  */
 void UI::activityMenu() {
-	system("cls");
+	CLEAR&&system("cls");
 	while (true) {
 		cout << "1. 查看当前活动\n";
 		cout << "2. 创建新的活动\n";

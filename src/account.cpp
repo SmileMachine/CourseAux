@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cstring>
+#include <string>
 #include "account.h"
 #include "data_io.h"
 #include "myhash.h"
@@ -47,19 +48,32 @@ void AccountList::init(const char path[]) {
 	 */
 	DataReader reader(path);
 	for (int i = 0; !reader.isEOF(); i++) {
-		reader.nextTerm(list[i].profile.name, 20);	//姓名
-		reader.nextTerm(list[i].profile.id, 15);	//学号
-		reader.nextTerm(list[i].profile.group, 15); //群组
-		char tmp[30];
-		reader.nextTerm(tmp, 30);
-		sscanf(tmp, "%d", &list[i].profile.status); //权限
-		reader.nextTerm(tmp, 30);
-		if (tmp[0]) {//检查是否存有密码
-			sscanf(tmp, "%d", &list[i].password.passwordHash); //读入密码
+		reader.nextItem(list[i].profile.name);	//姓名
+		reader.nextItem(list[i].profile.id);	//学号
+		reader.nextItem(list[i].profile.group); //群组
+		std::string tmp;
+		reader.nextItem(tmp);
+		sscanf(tmp.c_str(), "%d", &list[i].profile.status); //权限
+		reader.nextItem(tmp);
+		if (tmp.length()) {//检查是否存有密码
+			sscanf(tmp.c_str(), "%d", &list[i].password.passwordHash); //读入密码
 		} else { //如果不存在，则默认密码为学号
 			list[i].password.passwordHash = myhash::stringHash(list[i].profile.id);
 		}
 		size++;
+		// 	reader.nextTerm(list[i].profile.name, 20);	//姓名
+		// 	reader.nextTerm(list[i].profile.id, 15);	//学号
+		// 	reader.nextTerm(list[i].profile.group, 15); //群组
+		// 	char tmp[30];
+		// 	reader.nextTerm(tmp, 30);
+		// 	sscanf(tmp, "%d", &list[i].profile.status); //权限
+		// 	reader.nextTerm(tmp, 30);
+		// 	if (tmp[0]) {//检查是否存有密码
+		// 		sscanf(tmp, "%d", &list[i].password.passwordHash); //读入密码
+		// 	} else { //如果不存在，则默认密码为学号
+		// 		list[i].password.passwordHash = myhash::stringHash(list[i].profile.id);
+		// 	}
+		// 	size++;
 	}
 }
 /**
@@ -67,9 +81,9 @@ void AccountList::init(const char path[]) {
  * @param id 要查找的id
  * @return Account* 返回找到的账户指针
  */
-Account *AccountList::findByID(char id[]) { // Todo:顺序查找，有待优化
+Account *AccountList::findByID(std::string id) { // Todo:顺序查找，有待优化
 	for (int i = 0; i < size; i++) {
-		if (strcmp(id, list[i].profile.id) == 0) { // strcmp或许需要自己写一个?
+		if (myhash::stringHash(id) == myhash::stringHash(list[i].profile.id)) {
 			return &list[i];
 		}
 	}

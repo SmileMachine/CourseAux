@@ -3,7 +3,7 @@
 #include <cstdlib>
 using namespace std;
 void UI::infoQuery() {
-	system("cls");
+	CLEAR&&system("cls");
 	while (true) {
 		cout << "信息查询\n";
 		cout << "1. 课程信息\n";
