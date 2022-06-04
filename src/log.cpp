@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <ctime> //获取系统时间
+#include "sim_time.h"
 #include "log.h"
 #include "mkdir.h"
 #include "account.h" //获取当前用户的信息
@@ -39,7 +40,8 @@ string Log::getTimeStamp() {
  * @param tag 用于控制<header>
  */
 void Log::write(string info, TAG tag) {
-	logFile << getTimeStamp();
+	// logFile << getTimeStamp();
+	logFile << '[' << currentTime.toString() << ']';
 	string header;
 	switch (tag) { //根据不同的tag来确定header
 		case USER:

@@ -9,7 +9,9 @@
 #include "UI.h"
 #include "log.h"
 #include <io.h>
+#include "sim_time.h"
 using namespace std;
+
 bool UI::exit = 0;
 bool UI::isLoggedIn = false;
 bool UI::CLEAR = false;
@@ -21,6 +23,7 @@ void UI::entry() {
 	while (!exit) {
 		CLEAR&&system("cls");
 		cout << "欢迎来到线下课程辅助系统!\n";
+		cout << "当前时间: " << currentTime.toString() << endl;
 		if (!isLoggedIn) {
 			login();
 			continue;

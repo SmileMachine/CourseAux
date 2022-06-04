@@ -56,3 +56,23 @@
   - [x] CMake初步
   - [x] 汉字编码支持（读取UTF-8源代码文件，编译为GBK可执行文件）。
   - [ ] 使用动态链接库
+
+```c++
+class Bus{
+    。。
+    Time startTime;
+    。。
+}
+
+time.read();
+if(bus.time>currentTime){
+    
+}
+class Time{
+	int week;
+    int hour;
+    int min;
+    int second;
+}
+```
+

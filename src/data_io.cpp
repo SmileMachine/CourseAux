@@ -33,7 +33,7 @@ bool DataReader::nextItem(string&dst) {
 	}
 	ignore();
 	getline(fin, dst, delimiter); //读取一项
-	cout << dst << ": iseof=" << isEOF() << '\n';
+	// cout << dst << ": iseof=" << isEOF() << '\n';
 	return true;
 }
 /**
