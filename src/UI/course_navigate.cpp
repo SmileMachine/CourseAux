@@ -7,6 +7,6 @@ void UI::courseNavigate() {
 	CLEAR&&system("cls");
 	cout << "课程导航\n";
 	cout << "0.返回\n";
-	int select = getSelection();
+	int select = getNumber();
 
 }

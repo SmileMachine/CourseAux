@@ -13,7 +13,7 @@ void UI::debugMenu() {
 		cout << "3. 文件解压\n";
 		cout << "4. 打印所有账户信息\n";
 		cout << "0. 返回上层\n";
-		int select = getSelection();
+		int select = getNumber();
 		switch (select) {
 			case 1: {
 				cout << "请输入文件1的路径。\n";

@@ -1,4 +1,5 @@
 #include "UI.h"
+#include "sim_time.h"
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -11,10 +12,11 @@ void UI::activityMenu() {
 		cout << "1. 查看当前活动\n";
 		cout << "2. 创建新的活动\n";
 		cout << "0. 返回上层\n";
-		int select = getSelection();
+		int select = getNumber();
 		switch (select) {
 			case 1:
 				// 查看当前活动
+				// activityList();
 				break;
 			case 2:
 				// 创建新的活动

@@ -11,7 +11,7 @@ void UI::infoQuery() {
 		cout << "3. 课程资料\n";
 		cout << "4. 作业查询\n";
 		cout << "0. 返回上层\n";
-		int select = getSelection();
+		int select = getNumber();
 		switch (select) {
 			case 1:
 

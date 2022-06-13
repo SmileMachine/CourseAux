@@ -83,5 +83,5 @@ bool DataReader::nextTerm(char dst[], int len) {
 bool DataReader::isEOF() {
 	// return feof(file);
 	ignore();
-	return fin.eof();
+	return fin.eof() || fin.fail();
 }

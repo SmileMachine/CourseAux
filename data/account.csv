@@ -1,4 +1,4 @@
-#name,id,group,permission,passwordHash,(LastLogin,LastLogout)
-User1,3141592653,2718281828,0,,
-User2,1234567890,3216549870,0,,
-Admin,admin,admin,2,762590135,#密码是123456
+#name,id,group,permission,passwordHash,
+User1,3141592653,2718281828,0,2755278157,
+User2,1234567890,3216549870,0,2214264983,
+Admin,admin,admin,2,762590135,

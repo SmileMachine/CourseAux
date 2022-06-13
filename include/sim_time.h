@@ -9,15 +9,44 @@ class ActTime {
 public:
 	int year, month, mday;
 	int hour, minute;
+	long long pureNumber;
 	ActTime(int year, int month, int mday, int hour, int minute) :
 		year(year),
 		month(month),
 		mday(mday),
 		hour(hour),
-		minute(minute) {}
+		minute(minute) {
+		convertToPureNumber();
+	}
+	ActTime(int pureNumber) :pureNumber(pureNumber) {
+		dissolve();
+	}
+	/**
+	 * @brief 转换为形如197001010000的长整数
+	 */
+	void convertToPureNumber() {
+		pureNumber = year * 100000000
+			+ month * 1000000
+			+ mday * 10000
+			+ hour * 100
+			+ minute;
+	}
+	/**
+	 * @brief 返回一天中该时间的秒数。
+	 */
+	int nowTime() {
+		return hour * 3600 + minute * 60;
+	}
+	void dissolve() {
+		year = pureNumber / 100000000;
+		month = pureNumber / 1000000 % 100;
+		mday = pureNumber / 10000 % 100;
+		hour = pureNumber / 100 % 100;
+		minute = pureNumber % 100;
+	}
 	ActTime() {};
 	void write(std::ostream out) {
-		out << year << ' ' << minute;
+		out << pureNumber;
 	}
 };
 class SimTime {
@@ -25,7 +54,7 @@ public:
 	SimTime() :speed(360), isPause(false) {
 		time(&simulateTime);
 		timeStruct = localtime(&simulateTime);
-		std::thread*timeRun = new std::thread(run, this);
+		std::thread*timeRun = new std::thread(&SimTime::run, this);
 	}
 	void pause() {
 		isPause = true;
@@ -66,8 +95,8 @@ public:
 	void read(std::istream in) {
 		in >> simulateTime;
 	}
-private:
 	int speed;
+private:
 	time_t simulateTime;
 	tm*timeStruct;
 	bool isPause;

@@ -32,9 +32,10 @@ void UI::entry() {
 		cout << "2. 活动管理\n";
 		cout << "3. 课程导航\n";
 		cout << "4. 账户管理\n";
+		cout << "5. 系统设置\n";
 		// cout << "27.功能测试\n";
 		cout << "0. 退出程序\n";
-		int select = getSelection();
+		int select = getNumber();
 		switch (select) {
 			case 1://信息查询
 				infoQuery();
@@ -47,6 +48,9 @@ void UI::entry() {
 				break;
 			case 4://账户管理
 				accountMenu();
+				break;
+			case 5://系统设置
+				settings();
 				break;
 			case 0://退出
 				exit = true;
@@ -62,7 +66,16 @@ void UI::entry() {
 	}
 	logger.write("exit.", Log::SYS);
 }
-
+void UI::settings() {
+	cout << "调整模拟时间的速度。当前速度:每1秒为" << currentTime.speed << "秒\n";
+	cout << "请输入新的速度，输入0表示不修改\n";
+	int newSpeed = getNumber();
+	if (newSpeed > 0) {
+		currentTime.setSpeed(newSpeed);
+	} else {
+		cout << "速度未修改\n";
+	}
+}
 /**
  * @brief 从stdin中读取一行字符串，不含末尾回车。
  * @param len 字符串的长度上限
@@ -80,7 +93,7 @@ char* UI::getString(char input[], int len) {
 /**
  * @brief 读取用户的输入的一个整数，消除末尾回车，处理输入的错误
  */
-int UI::getSelection() {
+int UI::getNumber() {
 	int ret;
 	bool input = false;
 	while (!input) {

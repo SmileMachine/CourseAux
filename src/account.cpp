@@ -1,10 +1,14 @@
 #include <cstdio>
+#include <iostream>
+#include <fstream>
 #include <cstring>
 #include <string>
 #include "account.h"
 #include "data_io.h"
 #include "myhash.h"
-AccountList accountList("./data/account.csv"); //读取账户列表
+using namespace std;
+#define ACCOUNT_PATH "./data/account.csv"
+AccountList accountList(ACCOUNT_PATH); //读取账户列表
 Account *currentAccount;					   //在程序运行中的当前账户。
 
 /**
@@ -18,7 +22,7 @@ bool Password::check(const char str[]) {
  * @brief 将密码设置成指定的字符串
  * @param str 将要设置的密码
  */
-bool Password::set(char str[]) { //设置密码
+bool Password::set(const char str[]) { //设置密码
 	if (isInputValid(str)) {
 		passwordHash = myhash::stringHash(str);
 		return true;
@@ -32,6 +36,12 @@ bool Password::set(char str[]) { //设置密码
  */
 bool Password::isInputValid(const char str[]) {
 	return true;
+}
+/**
+ * @brief 用于从文件中读取密码的哈希值
+ */
+void Password::read(const HashVal hashVal) {
+	passwordHash = hashVal;
 }
 
 AccountList::AccountList(const char path[]) {
@@ -56,25 +66,24 @@ void AccountList::init(const char path[]) {
 		sscanf(tmp.c_str(), "%d", &list[i].profile.status); //权限
 		reader.nextItem(tmp);
 		if (tmp.length()) {//检查是否存有密码
-			sscanf(tmp.c_str(), "%d", &list[i].password.passwordHash); //读入密码
+			list[i].password.read((unsigned int)stoul(tmp)); //读入密码
 		} else { //如果不存在，则默认密码为学号
-			list[i].password.passwordHash = myhash::stringHash(list[i].profile.id);
+			// list[i].password.passwordHash = myhash::stringHash(list[i].profile.id);
+			list[i].password.set(list[i].profile.id.c_str());
 		}
 		size++;
-		// 	reader.nextTerm(list[i].profile.name, 20);	//姓名
-		// 	reader.nextTerm(list[i].profile.id, 15);	//学号
-		// 	reader.nextTerm(list[i].profile.group, 15); //群组
-		// 	char tmp[30];
-		// 	reader.nextTerm(tmp, 30);
-		// 	sscanf(tmp, "%d", &list[i].profile.status); //权限
-		// 	reader.nextTerm(tmp, 30);
-		// 	if (tmp[0]) {//检查是否存有密码
-		// 		sscanf(tmp, "%d", &list[i].password.passwordHash); //读入密码
-		// 	} else { //如果不存在，则默认密码为学号
-		// 		list[i].password.passwordHash = myhash::stringHash(list[i].profile.id);
-		// 	}
-		// 	size++;
 	}
+}
+/**
+ * @brief 将信息写入文件
+ */
+void AccountList::write() {
+	ofstream fout(ACCOUNT_PATH);
+	fout << "#name,id,group,permission,passwordHash,\n";
+	for (int i = 0; i < size; i++) {
+		fout << list[i].profile.toString() << list[i].password.toString() << endl;
+	}
+	fout.close();
 }
 /**
  * @brief [待优化]通过id查找账户，

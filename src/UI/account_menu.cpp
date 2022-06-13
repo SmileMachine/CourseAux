@@ -11,7 +11,7 @@ void UI::login() {
 	cout << "1. 登录\n";
 	cout << "2. 退出\n";
 	while (true) {
-		int select = getSelection();
+		int select = getNumber();
 		if (select == 1) {
 			break;
 		} else if (select == 2) {
@@ -53,7 +53,7 @@ void UI::accountMenu() {
 		cout << "2. 修改密码\n";
 		cout << "3. 退出账号\n";
 		cout << "0. 返回上层\n";
-		int select = getSelection();
+		int select = getNumber();
 		switch (select) {
 			case 1:
 				printAccountInfo();
@@ -61,6 +61,7 @@ void UI::accountMenu() {
 			case 2:
 				changePassword();
 				logger.write("Changed Password.");
+				accountList.write();
 				break;
 			case 3:
 				isLoggedIn = false;
