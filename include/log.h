@@ -10,7 +10,9 @@ public:
 		SYS,
 	};
 	void write(std::string info, TAG = USER);
+	void launchFile();
 private:
+	std::string path;
 	std::string getTimeStamp();
 	std::ofstream logFile; //日志文件流
 };

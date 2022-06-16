@@ -7,7 +7,6 @@ struct UserInfo {
 		STUDENT,
 		TEACHER,
 		ADMIN,
-		GUEST,
 	};
 	std::string name = {};	 //姓名
 	std::string id = {};	 //学工号
@@ -37,14 +36,18 @@ private:
 public:
 	UserInfo profile;  //用户信息
 	Password password; //用户密码
+	bool isStu() {
+		return profile.status == UserInfo::STUDENT;
+	}
 };
 
 class AccountList {
 public:
 	AccountList(const char path[]); // Todo:采用更佳的数据结构，方便查找
 	void init(const char path[]);
-	Account *findByID(std::string id); //通过ID查找
-#define AL_SIZE 100				  //初步定为100
+	Account *searchByID(std::string id); //通过ID查找
+	Account *searchByName(std::string name); //通过ID查找
+#define AL_SIZE 100	 //初步定为100
 	Account list[AL_SIZE];
 	void write();
 	int size = 0;

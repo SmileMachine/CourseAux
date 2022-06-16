@@ -2,11 +2,8 @@
 #include <iostream>
 #include <cstdlib>
 using namespace std;
-
+void Route();
 void UI::courseNavigate() {
 	CLEAR&&system("cls");
-	cout << "课程导航\n";
-	cout << "0.返回\n";
-	int select = getNumber();
-
+	Route();
 }

@@ -28,52 +28,99 @@ void UI::entry() {
 			login();
 			continue;
 		}
-		cout << "1. 信息查询\n";
-		cout << "2. 活动管理\n";
-		cout << "3. 课程导航\n";
-		cout << "4. 账户管理\n";
-		cout << "5. 系统设置\n";
-		// cout << "27.功能测试\n";
-		cout << "0. 退出程序\n";
-		int select = getNumber();
-		switch (select) {
-			case 1://信息查询
-				infoQuery();
-				break;
-			case 2://活动管理
-				activityMenu();
-				break;
-			case 3://课程导航
-				courseNavigate();
-				break;
-			case 4://账户管理
-				accountMenu();
-				break;
-			case 5://系统设置
-				settings();
-				break;
-			case 0://退出
-				exit = true;
-				break;
-			case 27://功能测试
-				debugMenu();
-				break;
-			default:
-				printf("%d: ", select);
-				cout << "请输入正确的选项\n";
-				break;
+		if (currentAccount && currentAccount->isStu()) {
+			cout << "1. 信息查询\n";
+			cout << "2. 活动管理\n";
+			cout << "3. 课程导航\n";
+			cout << "4. 账户管理\n";
+			cout << "5. 系统设置\n";
+			// cout << "27.功能测试\n";
+			cout << "0. 退出程序\n";
+			int select = getNumber();
+			switch (select) {
+				case 1://信息查询
+					logger.write("Info query.\n");
+					infoQuery();
+					break;
+				case 2://活动管理
+					logger.write("Activity manage.\n");
+					activityMenu();
+					break;
+				case 3://课程导航
+					logger.write("Course navigate.\n");
+					courseNavigate();
+					break;
+				case 4://账户管理
+					logger.write("Account manage.");
+					accountMenu();
+					break;
+				case 5://系统设置
+					settings();
+					break;
+				case 0://退出
+					exit = true;
+					break;
+				case 27://功能测试
+					debugMenu();
+					break;
+				default:
+					printf("%d: ", select);
+					cout << "请输入正确的选项\n";
+					break;
+			}
+		} else {
+			cout << "1. 课程安排\n";
+			cout << "2. 活动管理\n";
+			cout << "3. 查看日志\n";
+			cout << "4. 账户管理\n";
+			cout << "5. 系统设置\n";
+			// cout << "27.功能测试\n";
+			cout << "0. 退出程序\n";
+			int select = getNumber();
+			switch (select) {
+				case 1://课程安排
+					logger.write("Course arrange.");
+					courseArrange();
+					break;
+				case 2://活动管理
+					logger.write("Activity manage.");
+					activityMenu();
+					break;
+				case 3://查看日志
+					logger.write("View log file.");
+					logger.launchFile();
+					break;
+				case 4://账户管理
+					logger.write("Account manage.");
+					accountMenu();
+					break;
+				case 5://系统设置
+					settings();
+					break;
+				case 0://退出
+					exit = true;
+					break;
+				case 27://功能测试
+					debugMenu();
+					break;
+				default:
+					printf("%d: ", select);
+					cout << "请输入正确的选项\n";
+					break;
+			}
 		}
 	}
 	logger.write("exit.", Log::SYS);
 }
 void UI::settings() {
-	cout << "调整模拟时间的速度。当前速度:每1秒为" << currentTime.speed << "秒\n";
+	cout << "调整模拟时间的速度。当前速度:现实每 1 秒模拟系统" << currentTime.speed << "秒\n";
 	cout << "请输入新的速度，输入0表示不修改\n";
 	int newSpeed = getNumber();
 	if (newSpeed > 0) {
 		currentTime.setSpeed(newSpeed);
+		logger.write("Time speed set to" + to_string(newSpeed) + ".");
 	} else {
-		cout << "速度未修改\n";
+		cout << "速度未修改。\n";
 	}
 }
 /**
@@ -91,14 +138,14 @@ char* UI::getString(char input[], int len) {
 }
 
 /**
- * @brief 读取用户的输入的一个整数，消除末尾回车，处理输入的错误
+ * @brief 读取用户的输入的一个给定范围内的整数（默认范围为int范围内正整数），消除末尾回车，处理输入的错误
  */
-int UI::getNumber() {
+int UI::getNumber(int lb, int hb) {
 	int ret;
 	bool input = false;
 	while (!input) {
 		std::cin >> ret;
-		if (cin.fail()) {
+		if (cin.fail() || ret<lb || ret>hb) {
 			cout << "输入有误，请重新输入\n";
 			cin.clear();//流标志复位
 			cin.sync(); //同步缓冲区
@@ -130,5 +177,6 @@ string UI::getPath() {
 		cout << "文件不存在，请重新输入\n";
 		cin >> path;
 	}
+	// logger.write("Input path " + path);
 	return path;
 }

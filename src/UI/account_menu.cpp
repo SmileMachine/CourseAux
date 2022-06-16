@@ -2,12 +2,14 @@
 #include <iostream>
 #include <cstdlib>
 #include "account.h"
+#include "activity.h"
 #include "UI.h"
 #include "log.h"
 using namespace std;
 // 登录界面
 void UI::login() {
 	CLEAR&&system("cls");
+	activityList.isListenerOn = false;
 	cout << "1. 登录\n";
 	cout << "2. 退出\n";
 	while (true) {
@@ -25,7 +27,7 @@ void UI::login() {
 		cout << "学号: ";
 		char idInput[20];
 		getString(idInput, 20);
-		currentAccount = accountList.findByID(idInput);
+		currentAccount = accountList.searchByID(idInput);
 		if (!currentAccount) {
 			cout << "学号不存在。\n";
 			continue;
@@ -43,6 +45,7 @@ void UI::login() {
 			}
 		}
 	}
+	activityList.isListenerOn = true;
 	logger.write("logged in.");
 }
 
@@ -55,19 +58,23 @@ void UI::accountMenu() {
 		cout << "0. 返回上层\n";
 		int select = getNumber();
 		switch (select) {
-			case 1:
+			case 1: {
 				printAccountInfo();
+				logger.write("Viewed personal info.");
 				break;
-			case 2:
+			}
+			case 2: {
 				changePassword();
-				logger.write("Changed Password.");
+				logger.write("Changed password.");
 				accountList.write();
 				break;
-			case 3:
+			}
+			case 3: {
 				isLoggedIn = false;
 				logger.write("logged out.");
-				currentAccount = NULL;
+				currentAccount = nullptr;
 				return;
+			}
 			case 0:
 				return;
 			default:

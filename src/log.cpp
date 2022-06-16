@@ -6,6 +6,7 @@
 #include "log.h"
 #include "mkdir.h"
 #include "account.h" //获取当前用户的信息
+#include <cstdlib>
 using namespace std;
 
 Log logger;
@@ -18,7 +19,9 @@ Log::Log() {
 	time(&rawtime);
 	char logPath[30]; //日志文件的路径和文件名，通过当前时间来唯一生成
 	strftime(logPath, 30, "./log/%y%m%d_%H%M%S.log", localtime(&rawtime));
+	path = logPath;
 	logFile.open(logPath, ios::out);
+	logFile << "日志文件\n";
 	write("Program launched.", SYS);
 }
 /**
@@ -39,6 +42,12 @@ string Log::getTimeStamp() {
  * @param info 要向日志写的内容。
  * @param tag 用于控制<header>
  */
+void Log::launchFile() {
+	// string command = "D:/VSCode/Code.exe -n " + path;
+	// cout << "<" << command << ">" << endl;
+	system(("sublime_text " + path).c_str());
+	// system(command.c_str());
+}
 void Log::write(string info, TAG tag) {
 	// logFile << getTimeStamp();
 	logFile << '[' << currentTime.toString() << ']';

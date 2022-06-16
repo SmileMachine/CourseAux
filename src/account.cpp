@@ -1,4 +1,5 @@
 #include <cstdio>
+#include "log.h"
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -9,7 +10,7 @@
 using namespace std;
 #define ACCOUNT_PATH "./data/account.csv"
 AccountList accountList(ACCOUNT_PATH); //读取账户列表
-Account *currentAccount;					   //在程序运行中的当前账户。
+Account *currentAccount = nullptr;					   //在程序运行中的当前账户。
 
 /**
  * @brief 检查输入的密码是否匹配
@@ -68,11 +69,12 @@ void AccountList::init(const char path[]) {
 		if (tmp.length()) {//检查是否存有密码
 			list[i].password.read((unsigned int)stoul(tmp)); //读入密码
 		} else { //如果不存在，则默认密码为学号
-			// list[i].password.passwordHash = myhash::stringHash(list[i].profile.id);
 			list[i].password.set(list[i].profile.id.c_str());
 		}
 		size++;
 	}
+
+	logger.write("account.csv loaded.", Log::SYS);
 }
 /**
  * @brief 将信息写入文件
@@ -90,7 +92,7 @@ void AccountList::write() {
  * @param id 要查找的id
  * @return Account* 返回找到的账户指针
  */
-Account *AccountList::findByID(std::string id) { // Todo:顺序查找，有待优化
+Account *AccountList::searchByID(std::string id) { // Todo:顺序查找，有待优化
 	for (int i = 0; i < size; i++) {
 		if (myhash::stringHash(id) == myhash::stringHash(list[i].profile.id)) {
 			return &list[i];
