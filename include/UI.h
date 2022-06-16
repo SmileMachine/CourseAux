@@ -31,9 +31,11 @@ public:
 	static void showCourseSchedule(); //作业查询
 	static void submitHomework(Homework&homework); //提交作业
 	static void viewSubmittedHomework(); //查看已交作业文件,可下载。
+	static void viewMaterial(); //查看资料
 	//管理员菜单
 	static void courseArrange();//课程、考试安排
 	static void settings();//系统设置
+	static void uploadMaterial(); //上传资料
 	//调试用
 	static void debugMenu();
 };

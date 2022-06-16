@@ -8,8 +8,6 @@
 #include <vector>
 #include "file_manage.h"
 using std::string;
-#define UPLOAD_PATH "./upload/"
-#define DOWNLOAD_PATH "./download/"
 class VersionControl {
 	// "id-CourseName-HomeworkName-01-fileName.md"
 public:

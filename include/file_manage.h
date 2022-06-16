@@ -9,17 +9,18 @@
 using std::string;
 #define UPLOAD_PATH "./upload/"
 #define DOWNLOAD_PATH "./download/"
+#define MATERIAL_PATH "./material/"
 class FileManage {
 public:
 	static bool duplicateChecking(string path1, string path2) {
 		return myhash::fileHash(path1) == myhash::fileHash(path2);
 	}
-	static void submitFile(string filePath, string newName) {
-		encode(filePath, "./upload/" + newName);
+	static void submitFile(string srcPath, string dstPath) {
+		encode(srcPath, dstPath);
 	}
 	static void downloadFile(string filePath) {
 		std::cout << filePath << std::endl;
-		decode(filePath, "./download/" + getFileName(filePath));
+		decode(filePath, DOWNLOAD_PATH + getFileName(filePath));
 	}
 	// void openFile()
 	// D:\Documents\GitHub\shujujiegou27\README.md 

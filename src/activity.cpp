@@ -1,6 +1,7 @@
 #include <fstream>
 #include "log.h"
 #include <thread>
+#include <cstdlib>
 #include "activity.h"
 #include "data_io.h"
 #include "account.h"
@@ -184,7 +185,7 @@ ActList*ActList::getList(int mode, int content) {
 
 void ActList::remind(Activity*act) {
 	cout << "当前时间: " << currentTime.toString() << endl;
-	cout << "\n!!----ATTENTION----!!\n";
+	cout << "\n!!--------ATTENTION--------!!\n";
 	cout << "你有一项活动已经到达预定时间！\n";
 	cout << "时间：" << act->startTime.toString() << endl;
 	cout << "地点：" << act->location << endl;
@@ -196,8 +197,9 @@ void ActList::remind(Activity*act) {
 	} else {
 		cout << "集体活动\n";
 	}
-	cout << "!!-----------------!!\n\n";
+	cout << "!!-------------------------!!\n\n";
 	logger.write("Activity attention:" + content + ".");
+	system("pause");
 }
 void ActList::remindListener() {
 	Activity*listen = nullptr;

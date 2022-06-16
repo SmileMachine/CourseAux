@@ -25,8 +25,12 @@ void UI::infoQuery() {
 				examQuery();
 				logger.write("View exam info.");
 				break;
+			case 3:
+				viewMaterial();
+				break;
 			case 4:
 				homeworkQuery();
+				break;
 			case 0:
 				return;
 			default:

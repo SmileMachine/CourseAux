@@ -39,7 +39,7 @@ void UI::entry() {
 			int select = getNumber();
 			switch (select) {
 				case 1://信息查询
-					logger.write("Info query.\n");
+					logger.write("Info query.");
 					infoQuery();
 					break;
 				case 2://活动管理
@@ -88,7 +88,7 @@ void UI::entry() {
 					activityMenu();
 					break;
 				case 3://上传资料
-					logger.write("Upload material");
+					uploadMaterial();
 					break;
 				case 4://查看日志
 					logger.write("View log file.");

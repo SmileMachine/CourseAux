@@ -32,14 +32,14 @@ void UI::debugMenu() {
 			case 2: {
 				cout << "请输入文件的路径。\n";
 				string filePath = getPath();
-				encode(filePath, "./upload/" + FileManage::getFileName(filePath) + ".huf");
+				encode(filePath, UPLOAD_PATH + FileManage::getFileName(filePath) + ".huf");
 				// fileCompress(filePath);
 				break;
 			}
 			case 3: {
 				cout << "请输入文件的路径。\n";
 				string filePath = getPath();
-				decode(filePath, "./upload/" + FileManage::getFileName(filePath) + ".dehuf");
+				decode(filePath, DOWNLOAD_PATH + FileManage::getFileName(filePath) + ".dehuf");
 				// fileDeCompress(filePath);
 				break;
 			}
