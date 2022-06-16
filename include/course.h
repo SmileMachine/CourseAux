@@ -52,27 +52,9 @@ public:
 			return a.contact < b.contact;
 			});
 	}
-	CourseList*query(std::string name) {
-		CourseList*ret = new CourseList;
-		for (auto v = list.begin();v != list.end();v++) {
-			if (v->courseName == name) {
-				ret->list.push_back(*v);
-			}
-		}
-		return ret;
-	}
-	CourseList*queryToday() {
-		CourseList*ret = new CourseList;
-		for (auto v = list.begin();v != list.end();v++) {
-			CourseTime now(currentTime.getActTime());
-			CourseTime tomorrow = now;
-			tomorrow.weekday = (tomorrow.weekday + 1) % 7;
-			if (now < v->courseTime && v->courseTime < tomorrow) {
-				ret->list.push_back(*v);
-			}
-		}
-		return ret;
-	}
+	CourseList*query(std::string name);
+	CourseList*queryWeekday(int weekday);
+	CourseList*queryToday();
 	void print(int mode = 0);//课表
 };
 extern CourseList courseList;

@@ -22,7 +22,7 @@ bool UI::CLEAR = false;
 void UI::entry() {
 	while (!exit) {
 		CLEAR&&system("cls");
-		cout << "欢迎来到线下课程辅助系统!\n";
+		cout << "欢迎" << (currentAccount ? currentAccount->profile.name : "") << "来到线下课程辅助系统!\n";
 		cout << "当前时间: " << currentTime.toString() << endl;
 		if (!isLoggedIn) {
 			login();
@@ -71,9 +71,10 @@ void UI::entry() {
 		} else {
 			cout << "1. 课程安排\n";
 			cout << "2. 活动管理\n";
-			cout << "3. 查看日志\n";
-			cout << "4. 账户管理\n";
-			cout << "5. 系统设置\n";
+			cout << "3. 上传资料\n";
+			cout << "4. 查看日志\n";
+			cout << "5. 账户管理\n";
+			cout << "6. 系统设置\n";
 			// cout << "27.功能测试\n";
 			cout << "0. 退出程序\n";
 			int select = getNumber();
@@ -86,15 +87,18 @@ void UI::entry() {
 					logger.write("Activity manage.");
 					activityMenu();
 					break;
-				case 3://查看日志
+				case 3://上传资料
+					logger.write("Upload material");
+					break;
+				case 4://查看日志
 					logger.write("View log file.");
 					logger.launchFile();
 					break;
-				case 4://账户管理
+				case 5://账户管理
 					logger.write("Account manage.");
 					accountMenu();
 					break;
-				case 5://系统设置
+				case 6://系统设置
 					settings();
 					break;
 				case 0://退出

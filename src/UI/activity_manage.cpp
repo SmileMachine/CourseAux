@@ -146,8 +146,12 @@ void UI::createActivity() {
 		ActTime startTime = getActTime();
 		cout << "请输入活动结束时间:\n";
 		ActTime endTime = getActTime();
+		while (endTime < startTime) {
+			cout << "结束时间不能早于开始时间，请重新填写。\n";
+			endTime = getActTime();
+		}
 		newAct.startTime = startTime;
-		newAct.endTime = startTime;
+		newAct.endTime = endTime;
 		Course* courseConf = newAct.detectCourseConflict();
 		if (courseConf) {
 			cout << "你的活动与以下课程有冲突：";
@@ -161,7 +165,7 @@ void UI::createActivity() {
 		if (courseConf || actConf) {
 			cout << "是否要重新填写时间？(1/0)\n";
 			if (!getNumber()) {
-				break;
+				return;
 			}
 		} else {
 			break;

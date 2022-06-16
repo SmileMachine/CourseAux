@@ -33,7 +33,83 @@ CourseList::CourseList(string path) {
 	logger.write("course.csv loaded.", Log::SYS);
 	// thread courseRemind
 }
-
+CourseList*CourseList::query(std::string name) {
+	CourseList*ret = new CourseList;
+	for (auto v = list.begin();v != list.end();v++) {
+		if (v->courseName == name) {
+			ret->list.push_back(*v);
+		}
+	}
+	return ret;
+}
+CourseList*CourseList::queryWeekday(int weekday) {
+	CourseList*ret = new CourseList;
+	for (auto v = list.begin();v != list.end();v++) {
+		if (v->courseTime.weekday == weekday) {
+			ret->list.push_back(*v);
+		}
+	}
+	return ret;
+}
+CourseList*CourseList::queryToday() {
+	CourseList*ret = new CourseList;
+	for (auto v = list.begin();v != list.end();v++) {
+		CourseTime now(currentTime.getActTime());
+		CourseTime tomorrow = now;
+		tomorrow.weekday = (tomorrow.weekday + 1) % 7;
+		if (now < v->courseTime && v->courseTime < tomorrow) {
+			ret->list.push_back(*v);
+		}
+	}
+	return ret;
+}
+void CourseList::write() {
+	ofstream fout(COURSE_PATH);
+	char delim = ',';
+	fout << "#course,teacher,courseTime,courseEndTime,courseAddress,contact,currentProgress,examTime,examEndTime,examAddress,\n";
+	for (auto v = list.begin();v < list.end();v++) {
+		fout << v->courseName << delim
+			<< v->teacherName << delim
+			<< v->courseTime.convertToNumber() << delim
+			<< v->courseEndTime.convertToNumber() << delim
+			<< v->courseAddress << delim
+			<< v->contact << delim
+			<< v->currentProgress << delim
+			<< v->examTime.convertToPureNumber() << delim
+			<< v->examEndTime.convertToPureNumber() << delim
+			<< v->examAddress << delim
+			<< endl;
+	}
+	logger.write("Write to course.csv", Log::SYS);
+	fout.close();
+}
+void Course::print(int mode) {
+	cout << "课程名称：" << courseName << endl;
+	if (mode == FULL || mode == BRIEF) {
+		cout << "上课时间：" << courseTimeString() << endl;
+		cout << "上课地点：" << courseAddress << endl;
+	}
+	if (mode == FULL) {
+		cout << "教师名称：" << teacherName << endl;
+		cout << "联系方式：" << contact << endl;
+		cout << "当前进度：" << currentProgress << endl;
+	}
+	if (mode == FULL || mode == EXAM) {
+		if (examTime.convertToPureNumber()) {
+			cout << "考试时间：" << examTimeString() << endl;
+			cout << "考试地点：" << examAddress << endl << endl;
+		} else {
+			cout << "考试：未安排\n";
+		}
+	}
+}
+void CourseList::print(int mode) {
+	int cnt = 0;
+	for (auto v : list) {
+		cout << ++cnt << ":" << endl;
+		v.print(mode);
+	}
+}
 // void CourseList::remindContext() {
 // 	Course*listen = nullptr;
 // 	Account*judge = currentAccount;
@@ -93,46 +169,3 @@ CourseList::CourseList(string path) {
 // 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 // 	}
 // }
-void CourseList::write() {
-	ofstream fout(COURSE_PATH);
-	char delim = ',';
-	fout << "#course,teacher,courseTime,courseEndTime,courseAddress,contact,currentProgress,examTime,examEndTime,examAddress,\n";
-	for (auto v = list.begin();v < list.end();v++) {
-		fout << v->courseName << delim
-			<< v->teacherName << delim
-			<< v->courseTime.convertToNumber() << delim
-			<< v->courseEndTime.convertToNumber() << delim
-			<< v->courseAddress << delim
-			<< v->contact << delim
-			<< v->currentProgress << delim
-			<< v->examTime.convertToPureNumber() << delim
-			<< v->examEndTime.convertToPureNumber() << delim
-			<< v->examAddress << delim
-			<< endl;
-	}
-	logger.write("Write to course.csv", Log::SYS);
-	fout.close();
-}
-void Course::print(int mode) {
-	cout << "课程名称：" << courseName << endl;
-	if (mode == FULL || mode == BRIEF) {
-		cout << "上课时间：" << courseTimeString() << endl;
-		cout << "上课地点：" << courseAddress << endl;
-	}
-	if (mode == FULL) {
-		cout << "教师名称：" << teacherName << endl;
-		cout << "联系方式：" << contact << endl;
-	}
-	if (mode == FULL || mode == EXAM) {
-		cout << "当前进度：" << currentProgress << endl;
-		cout << "考试时间：" << examTimeString() << endl;
-		cout << "考试地点：" << examAddress << endl << endl;
-	}
-}
-void CourseList::print(int mode) {
-	int cnt = 0;
-	for (auto v : list) {
-		cout << ++cnt << ":" << endl;
-		v.print(mode);
-	}
-}

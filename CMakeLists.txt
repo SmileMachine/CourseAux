@@ -22,6 +22,7 @@ file(
 	GLOB SOURCES
 	"src/*"
 	"src/UI/*"
+	"src/HuffmanCodec/*"
 )
 add_executable(${PROJECT_NAME} ${SOURCES})
 

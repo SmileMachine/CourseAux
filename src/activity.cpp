@@ -234,12 +234,14 @@ void ActList::remindListener() {
 					case Activity::DAILY: {
 						while (listen->startTime < currentTime.getActTime()) {
 							listen->startTime.toNextDay();
+							listen->endTime.toNextDay();
 						}
 						break;
 					}
 					case Activity::WEEKLY: {
 						while (listen->startTime < currentTime.getActTime()) {
 							listen->startTime.toNextWeek();
+							listen->endTime.toNextWeek();
 						}
 						break;
 					}

@@ -40,7 +40,13 @@ private:
 		return (month == 2 && (!(year % 4) && (year % 100 || !(year % 400))));
 	}
 public:
-	ActTime() {};
+	ActTime() :
+		year(0),
+		month(0),
+		mday(0),
+		hour(0),
+		minute(0),
+		pureNumber(0) {}
 	ActTime(int year, int month, int mday, int hour, int minute) :
 		year(year),
 		month(month),

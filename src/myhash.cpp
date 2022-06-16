@@ -25,6 +25,7 @@ myhash::HashVal myhash::stringHash(std::string str) {
  * @param path 该文件的路径
  * @return 无符号32位整数，该文件的哈希值
  */
+#include <iostream>
 myhash::HashVal myhash::fileHash(std::string path) {
 	std::fstream fin(path);
 	return fileHash(fin);
@@ -48,5 +49,6 @@ myhash::HashVal myhash::fileHash(std::fstream&file) {
 		}
 		ret = ret * seed + tmp;
 	}
+
 	return ret;
 }

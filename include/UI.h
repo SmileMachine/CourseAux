@@ -1,6 +1,7 @@
 #ifndef UI_H
 #define UI_H
 #include <iostream>
+#include "homework.h"
 class UI {
 public:
 	//工具类函数及状态变量
@@ -22,9 +23,14 @@ public:
 	static void activityMenu(); //活动管理
 	static void infoQuery(); //信息查询
 	static void courseQuery();//课程查询
+	static void examQuery();//考试查询
 	static void courseNavigate(); //课程导航
 	static void activityQuery(); //活动查询
 	static void createActivity(); //创建活动
+	static void homeworkQuery(); //作业查询
+	static void showCourseSchedule(); //作业查询
+	static void submitHomework(Homework&homework); //提交作业
+	static void viewSubmittedHomework(); //查看已交作业文件,可下载。
 	//管理员菜单
 	static void courseArrange();//课程、考试安排
 	static void settings();//系统设置

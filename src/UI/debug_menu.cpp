@@ -1,10 +1,12 @@
 #include <iostream>
 #include <cstdlib>
 using namespace std;
-
+#include "file_manage.h"
+#include "version_control.h"
 #include "UI.h"
 #include "myhash.h"
 #include "account.h"
+#include "huffman_codec.h"
 void UI::debugMenu() {
 	CLEAR&&system("cls");
 	while (true) {
@@ -27,15 +29,17 @@ void UI::debugMenu() {
 				}
 				break;
 			}
-			case 2: { //未实现
+			case 2: {
 				cout << "请输入文件的路径。\n";
 				string filePath = getPath();
+				encode(filePath, "./upload/" + FileManage::getFileName(filePath) + ".huf");
 				// fileCompress(filePath);
 				break;
 			}
-			case 3: { //未实现
+			case 3: {
 				cout << "请输入文件的路径。\n";
 				string filePath = getPath();
+				decode(filePath, "./upload/" + FileManage::getFileName(filePath) + ".dehuf");
 				// fileDeCompress(filePath);
 				break;
 			}

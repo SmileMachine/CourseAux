@@ -85,11 +85,11 @@ void UI::accountMenu() {
 
 // 打印个人信息
 void UI::printAccountInfo() {
-	cout << "name:\t" << currentAccount->profile.name << '\n';
-	cout << "id:\t" << currentAccount->profile.id << '\n';
-	cout << "group:\t" << currentAccount->profile.group << '\n';
-	string status[] = { "student","teacher","admin","guest" };
-	cout << "status:\t" << status[currentAccount->profile.status] << '\n';
+	cout << "姓名:\t" << currentAccount->profile.name << '\n';
+	cout << "学号:\t" << currentAccount->profile.id << '\n';
+	cout << "部门:\t" << currentAccount->profile.group << '\n';
+	string status[] = { "学生","老师","管理员","游客" };
+	cout << "身份:\t" << status[currentAccount->profile.status] << '\n';
 }
 
 // 修改密码
