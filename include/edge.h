@@ -8,7 +8,7 @@ public:
 	int start;//开始标号
 	int end;//结束标号
 	int length;//长度,单位m
-	int bike;//是否可以骑车 1可以 0不可以
+	bool bike;//是否可以骑车 
 	double crowd;//拥挤程度,每条道路不一样,是一个0-1的数字
 	double time;//用于方案2的计算 单位秒
 	double ridingTime;//用于方案3的计算 单位秒

@@ -8,9 +8,9 @@ struct UserInfo {
 		TEACHER,
 		ADMIN,
 	};
-	std::string name = {};	 //姓名
-	std::string id = {};	 //学工号
-	std::string group = {}; //用户所在的群组，如班级
+	std::string name;	 //姓名
+	std::string id;	 //学工号
+	std::string group; //用户所在的群组，如班级
 	Status status;		 //该用户的身份
 	std::string toString() {
 		return name + ',' + id + ',' + group + ',' + std::to_string(status) + ',';
@@ -46,7 +46,7 @@ public:
 	AccountList(const char path[]); // Todo:采用更佳的数据结构，方便查找
 	void init(const char path[]);
 	Account *searchByID(std::string id); //通过ID查找
-	Account *searchByName(std::string name); //通过ID查找
+	Account *searchByName(std::string name); //通过姓名查找
 #define AL_SIZE 100	 //初步定为100
 	Account list[AL_SIZE];
 	void write();

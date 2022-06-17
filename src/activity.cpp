@@ -88,7 +88,7 @@ void ActList::write() {
 	}
 	fout.close();
 }
-ActList*ActList::search(string ID) {
+ActList*ActList::getList(string ID) {
 	ActList* ret = new ActList;
 	for (auto v = list.begin();v < list.end();v++) {
 		if (v->ID == ID) {

@@ -6,16 +6,16 @@
 class Course {
 public:
 	Course() {}
-	std::string courseName;
-	std::string teacherName;
-	CourseTime courseTime;
-	CourseTime courseEndTime;
-	std::string courseAddress;
-	std::string contact;
-	std::string currentProgress;
-	ActTime examTime;
-	ActTime examEndTime;
-	std::string examAddress;
+	std::string courseName; 	//课程名称
+	std::string teacherName;	//老师姓名
+	CourseTime courseTime;		//上课时间
+	CourseTime courseEndTime;	//下课时间
+	std::string courseAddress;	//上课地点
+	std::string contact;		//联系方式
+	std::string currentProgress;//课程进度
+	ActTime examTime;			//考试时间
+	ActTime examEndTime;		//考试结束时间
+	std::string examAddress;	//考试地点
 	std::string courseTimeString() {
 		return courseTime.toString(courseEndTime);
 	}

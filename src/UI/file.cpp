@@ -14,13 +14,17 @@ void UI::uploadMaterial() {
 	cout << "请输入文件路径\n";
 	string filePath;
 	getline(cin, filePath);
-
+	string fileName = FileManage::getFileName(filePath);
 	vector<string>*ls = FileManage::getFileList(MATERIAL_PATH);
+	FileManage::submitFile(filePath, MATERIAL_PATH + fileName);
 	bool hasDuplicate = false;
 	int cnt = 0;
 	for (auto v : *ls) {
-		if (FileManage::duplicateChecking(filePath, v)) {
+		if (FileManage::duplicateChecking(MATERIAL_PATH + fileName, v)) {
 			hasDuplicate = true;
+			if (fileName != FileManage::getFileName(v)) {
+				FileManage::deleteFile(MATERIAL_PATH + fileName);
+			}
 			break;
 		}
 	}
@@ -28,7 +32,7 @@ void UI::uploadMaterial() {
 		cout << "该资料你已经上传过\n";
 		logger.write("Material repeat.");
 	} else {
-		cout << "上传完成\n";
+		cout << "上传到:" << MATERIAL_PATH << endl;
 		logger.write("Material uploaded: " + filePath);
 	}
 }

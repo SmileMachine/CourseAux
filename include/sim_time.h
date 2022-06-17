@@ -204,7 +204,7 @@ public:
 	void pause() {
 		isPause = true;
 	}
-	void unpause() {
+	void resume() {
 		isPause = false;
 	}
 	/**

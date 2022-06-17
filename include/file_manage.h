@@ -6,10 +6,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <windows.h>
 using std::string;
 #define UPLOAD_PATH "./upload/"
 #define DOWNLOAD_PATH "./download/"
 #define MATERIAL_PATH "./material/"
+#define TEMP_PATH "./temp/"
 class FileManage {
 public:
 	static bool duplicateChecking(string path1, string path2) {
@@ -35,6 +37,9 @@ public:
 		} else {
 			return path.substr(pos + 1);
 		}
+	}
+	static void deleteFile(string filePath) {
+		remove(filePath.c_str());
 	}
 	static std::vector<string>*getFileList(string dir);
 };

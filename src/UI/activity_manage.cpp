@@ -217,7 +217,7 @@ void UI::activityQuery() {
 		ActList*query;
 		switch (select) {
 			case 1: {
-				query = activityList.search(currentAccount->profile.id);
+				query = activityList.getList(currentAccount->profile.id);
 				logger.write("View all activities.");
 				break;
 			}
@@ -262,7 +262,7 @@ void UI::activityQuery() {
 		string ID;
 		getline(cin, ID);
 		logger.write("Searched activities of " + ID);
-		ActList*actQuery = activityList.search(currentAccount->profile.id);
+		ActList*actQuery = activityList.getList(currentAccount->profile.id);
 		if (actQuery) {
 			actQuery->print();
 			delete actQuery;

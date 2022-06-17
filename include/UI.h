@@ -28,7 +28,7 @@ public:
 	static void activityQuery(); //活动查询
 	static void createActivity(); //创建活动
 	static void homeworkQuery(); //作业查询
-	static void showCourseSchedule(); //作业查询
+	static void showCourseSchedule(); //显示课程表
 	static void submitHomework(Homework&homework); //提交作业
 	static void viewSubmittedHomework(); //查看已交作业文件,可下载。
 	static void viewMaterial(); //查看资料

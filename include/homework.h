@@ -6,10 +6,10 @@ using std::string;
 // course,homework,isFinished,ID,
 class Homework {
 public:
-	string course;
-	string homework;
-	bool isFinished;
-	string ID;
+	string course;	//课程名称
+	string homework;//作业内容
+	bool isFinished;//是否完成
+	string ID;		//相关学号
 	enum PrintMode {
 		FULL,  //查看所有
 		COURSE, //按课程查询
@@ -29,10 +29,10 @@ public:
 		DONE,
 		UNDONE,
 	};
-	void write();
-	HomeworkList* getList(int mode);
-	HomeworkList* getList(string course);
-	void doneHomework(Homework&homework);
+	void write();//写入文件
+	HomeworkList* getList(int mode);		//根据特定模式查询
+	HomeworkList* getList(string course);	//根据课程名称查询
+	void doneHomework(Homework&homework);	//将某个作业的状态设置为已完成
 };
 extern HomeworkList homeworkList;
 #endif
