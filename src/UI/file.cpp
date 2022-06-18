@@ -38,7 +38,7 @@ void UI::uploadMaterial() {
 }
 void UI::viewMaterial() {
 	vector<string>*ls = FileManage::getFileList(MATERIAL_PATH);
-	int cnt = 0;
+	int cnt = 1;
 	for (auto v : *ls) {
 		cout << cnt++ << ": " << v << endl;
 	}
@@ -48,8 +48,9 @@ void UI::viewMaterial() {
 		if (download) {
 			cout << "请选择要下载的文件：";
 			int downloadID = getNumber(1, ls->size());
-			string fileName = ls->at(downloadID);
+			string fileName = ls->at(downloadID - 1);
 			FileManage::downloadFile(fileName);
+			cout << fileName << endl;
 			cout << "下载完成，文件保存在 \"./download/\" 目录下\n";
 			logger.write("Download " + fileName);
 		}

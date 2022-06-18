@@ -292,7 +292,7 @@ void outputRoute(int path[], int start, int end) {
 	cout << ve[output.top()].info;
 	output.pop();
 	while (!output.empty()) {
-		cout << output.topIdx << '\t' << output.size << endl;
+		// cout << output.topIdx << '\t' << output.size << endl;
 		cout << "->" << ve[output.top()].info;
 		output.pop();
 	}
@@ -330,7 +330,7 @@ void busShahe2Haidian(int select)//沙河到海淀方案
 				//i就是沙河到海淀最短距离的班车车牌号
 				cout << "这是" << ((bus[min[i]].isBus == 1) ? "公交车" : "校车") << endl;
 				cout << "车牌号是:" << bus[min[i]].id1 << " "
-					<< "乘车时间是:" << bus[min[i]].startTime << endl
+					<< "乘车时间是:" << bus[min[i]].startTime / 3600 << ":00" << endl
 					<< "大约行驶距离是:" << bus[min[i]].length / 1000 << "km" << " "
 					<< "大约需要:" << bus[min[i]].time / 60 << "min" << endl;
 				logger.write("Find shortest distance route for bus from Shahe to Haidian.");
@@ -359,7 +359,7 @@ void busShahe2Haidian(int select)//沙河到海淀方案
 				//i就是沙河到海淀最短距离的车辆车牌号
 				cout << "这是" << ((bus[min[i]].isBus == 1) ? "公交车" : "校车") << endl;
 				cout << "车牌号是:" << bus[min[i]].id1 << " "
-					<< "乘车时间是:" << bus[min[i]].startTime << endl
+					<< "乘车时间是:" << bus[min[i]].startTime / 3600 << ":00" << endl
 					<< "大约行驶距离是:" << bus[min[i]].length / 1000 << "km" << " "
 					<< "大约需要:" << bus[min[i]].time / 60 << "min" << endl;
 
@@ -374,12 +374,15 @@ void busHaidian2Shahe(int select)//海淀到沙河
 	ActTime now = currentTime.getActTime();
 	int min[busNumber] = { -1 };//最小车辆信息的标号，可以是多辆
 	int j = 0;
+	for (int i = 0; i < busNumber; i++) {//初始化最小车辆信息的标号
+		min[i] = -1;
+	}
 	min[0] = 0;
 	switch (select) {
 		case 1://最短距离的车辆信息
 		{
 			for (int i = 1; i < busNumber; i++) {
-				if (bus[i].startTime > now.nowTime() && bus[i].way == 2)//符合要求的车辆
+				if (bus[i].startTime > now.nowTime() && bus[i].way == 0)//符合要求的车辆
 				{
 					if (bus[i].length < bus[min[0]].length)//更新最小距离车辆
 					{
@@ -397,7 +400,7 @@ void busHaidian2Shahe(int select)//海淀到沙河
 				//i就是沙河到海淀最短距离的路径
 				cout << "这是" << ((bus[min[i]].isBus == 1) ? "公交车" : "校车") << endl;
 				cout << "车牌号是:" << bus[min[i]].id1 << " "
-					<< "乘车时间是:" << bus[min[i]].startTime << endl
+					<< "乘车时间是:" << bus[min[i]].startTime / 3600 << ":00" << endl
 					<< "大约行驶距离是:" << bus[min[i]].length / 1000 << "km" << " "
 					<< "大约需要:" << bus[min[i]].time / 60 << "分" << endl;
 
@@ -409,7 +412,7 @@ void busHaidian2Shahe(int select)//海淀到沙河
 		case 3://最短时间
 		{
 			for (int i = 1; i < busNumber; i++) {
-				if (bus[i].startTime > now.nowTime() && bus[i].way == 2)//符合要求的车辆
+				if (bus[i].startTime > now.nowTime() && bus[i].way == 0)//符合要求的车辆
 				{
 					if (bus[i].time < bus[min[0]].time)//更新最小距离车辆
 					{
@@ -427,7 +430,7 @@ void busHaidian2Shahe(int select)//海淀到沙河
 				//i就是海淀到沙河最短距离的路径
 				cout << "这是" << ((bus[min[i]].isBus == 1) ? "公交车" : "校车") << endl;
 				cout << "车牌号是:" << bus[min[i]].id1 << " "
-					<< "乘车时间是:" << bus[min[i]].startTime << endl
+					<< "乘车时间是:" << bus[min[i]].startTime / 3600 << ":00" << endl
 					<< "大约行驶距离是:" << bus[min[i]].length / 1000 << "km" << " "
 					<< "大约需要:" << bus[min[i]].time / 60 << "分" << endl;
 

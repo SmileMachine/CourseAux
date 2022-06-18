@@ -22,6 +22,7 @@ public:
 	}
 	static void downloadFile(string filePath) {
 		std::cout << filePath << std::endl;
+		std::cout << DOWNLOAD_PATH + getFileName(filePath) << std::endl;
 		decode(filePath, DOWNLOAD_PATH + getFileName(filePath));
 	}
 	// void openFile()

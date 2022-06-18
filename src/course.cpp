@@ -109,6 +109,9 @@ void CourseList::print(int mode) {
 		cout << ++cnt << ":" << endl;
 		v.print(mode);
 	}
+	if (list.size() == 0) {
+		cout << "今天没有课了\n";
+	}
 }
 // void CourseList::remindContext() {
 // 	Course*listen = nullptr;

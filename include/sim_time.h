@@ -112,7 +112,7 @@ public:
 		trim();
 	}
 	/**
-	 * @brief 返回星期几，0代表星期日，然后依次表示星期一、二……六。
+	 * @brief Zeller 算法 返回星期几，0代表星期日，然后依次表示星期一、二……六。
 	 */
 	int weekday() {
 		int y = year;
